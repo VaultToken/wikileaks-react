@@ -42,4 +42,4 @@ const HASURA_HTTP_LINK = new createHttpLink({
     cache: new InMemoryCache(),
   });
 
-  export default clientHasura
+  export default clientHasuraPublic
