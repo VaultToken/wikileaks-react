@@ -1,6 +1,6 @@
 import { GET_USER_ROLES  } from "../queries/user/user_roles";
 import { useQuery, useLazyQuery } from "@apollo/client";
-import clientHasura from "../apolloClient"
+import clientHasuraPublic from "../apolloClient"
 import { useEffect, useState } from "react";
 
 
