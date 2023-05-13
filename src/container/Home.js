@@ -21,10 +21,6 @@ const Home = () => {
     },
   });
 
-  useEffect(() => {
-      get_user_roles();
-    });
-
   
 
     return (
