@@ -1,12 +1,44 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { GET_USER_ROLES  } from "../queries/user/user_roles";
+import { useQuery, useLazyQuery } from "@apollo/client";
+import clientHasura from "../apolloClient"
+import { useEffect, useState } from "react";
+
 
 const Home = () => {
-    return <>
+  useQuery(GET_USER_ROLES, {
+    fetchPolicy: "network-only",
+    client: clientHasura,
+    onCompleted: (res) => {
+      console.log(res)
+    },
+  });
+
+  const [get_user_roles] = useLazyQuery(GET_USER_ROLES, {
+    fetchPolicy: "network-only",
+    client: clientHasura,
+    onCompleted: (res) => {
+      console.log(res)
+    },
+  });
+
+  useEffect(() => {
+      get_user_roles();
+    });
+
+  
+
+    return (
+      <>
     
-    <h1>Home</h1>;
-    
-    </>
+      <h1>Home</h1>;
+      <button onClick={() => {
+            get_user_roles();
+          }}>
+            click for user roles in console
+      </button>
+      
+      </>
+    )
     
     
   };
