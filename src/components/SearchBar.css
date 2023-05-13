@@ -1,0 +1,14 @@
+.search-input {
+    background-color: black;
+    color: white;
+    border: none; /* Remove default border */
+    border-radius: 20px; /* Set border radius */
+    padding: 10px 20px; /* Add padding */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add box shadow */
+    transition: box-shadow 0.2s ease-in-out; /* Add transition */
+}
+
+.search-input:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); /* Increase box shadow on focus */
+}
