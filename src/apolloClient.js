@@ -37,7 +37,7 @@ const HASURA_HTTP_LINK = new createHttpLink({
   
   
   */
-  const clientHasura = new ApolloClient({
+  const clientHasuraPublic = new ApolloClient({
     uri: 'http://localhost:8081/v1/graphql',
     cache: new InMemoryCache(),
   });
