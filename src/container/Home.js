@@ -21,15 +21,15 @@ const Home = () => {
     },
   });
 
-  useEffect(() => {
-      get_user_roles();
-    });
-
   
 
     return (
       <>
-    
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <h1>Home</h1>;
       <button onClick={() => {
             get_user_roles();
