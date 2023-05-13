@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const Home = () => {
   useQuery(GET_USER_ROLES, {
     fetchPolicy: "network-only",
-    client: clientHasura,
+    client: clientHasuraPublic,
     onCompleted: (res) => {
       console.log(res)
     },
@@ -15,7 +15,7 @@ const Home = () => {
 
   const [get_user_roles] = useLazyQuery(GET_USER_ROLES, {
     fetchPolicy: "network-only",
-    client: clientHasura,
+    client: clientHasuraPublic,
     onCompleted: (res) => {
       console.log(res)
     },
