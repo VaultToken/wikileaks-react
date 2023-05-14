@@ -1,35 +1,51 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./SearchBar.css"
-function SearchBar() {
-    const [searchTerm, setSearchTerm] = useState('');
+import {useLazyQuery} from "@apollo/client";
+import {SEARCH_GET_ARTICLES} from "../queries/Article/articleQuerys"
+import clientHasuraPublic from "../apolloClient";
+
+const SearchBar = () =>  {
+    const [activeSearchTerm, setActiveSearchTerm] = useState('');
+    const [actualSearchTerm, setActualSearchTerm] = useState('');
     const searchTimeout = useRef(null);
+    //const [getArticles, { loading, error, data }] = useLazyQuery(SEARCH_GET_ARTICLES);
 
     useEffect(() => {
         // This effect will run every time the searchTerm changes
         // If searchTerm changes within 0.5 seconds, the previous timeout is cleared
+        if (activeSearchTerm === '') return;
         clearTimeout(searchTimeout.current);
         searchTimeout.current = setTimeout(() => {
-            // Perform the search after 0.5 seconds
-            performSearch();
+                performSearch();
         }, 500);
-    }, [searchTerm]);
+    }, [activeSearchTerm]);
 
     function performSearch() {
-        console.log(`Searching for "${searchTerm}"`);
-        // Perform the search here
+        console.log("searching for",activeSearchTerm);
+        setActualSearchTerm(activeSearchTerm);
+        handleSearch();
     }
 
     function handleClearClick() {
-        setSearchTerm('');
+        setActiveSearchTerm('');
     }
 
+    const [getArticles, { loading, error, data },] = useLazyQuery(SEARCH_GET_ARTICLES, {client: clientHasuraPublic});
+
+    const handleSearch = () => {
+        getArticles({ variables: { searchQuery: `${actualSearchTerm}%` },
+        client: clientHasuraPublic,
+        onCompleted: (res) => {console.log(res);}
+        });
+    }
+    
     return (
         <ul id="menu">
             <li>
                 <input
                     type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={activeSearchTerm}
+                    onChange={(e) => setActiveSearchTerm(e.target.value)}
                     onClick={handleClearClick}
                     className={"search-input"}
                 />
