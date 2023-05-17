@@ -6,6 +6,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 const HASURA_HTTP_LINK = new createHttpLink({
     uri: 'http://localhost:8081/v1/graphql',
   });
+  
 
   /*
     const link = new WebSocketLink({
