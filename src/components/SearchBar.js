@@ -29,28 +29,15 @@ const SearchBar = () =>  {
     function handleClearClick() {
         setActiveSearchTerm('');
     }
-
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
+    
     const [getArticles, { loading, error, data },] = useLazyQuery(SEARCH_GET_ARTICLES, {client: clientHasuraPublic});
 
     const handleSearch = () => {
         getArticles({ variables: { searchQuery: `${actualSearchTerm}%` },
-<<<<<<< Updated upstream
-        client: clientHasuraPublic,
-=======
->>>>>>> Stashed changes
         onCompleted: (res) => {console.log(res);}
         });
     }
     
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     return (
         <ul id="menu">
             <li>
