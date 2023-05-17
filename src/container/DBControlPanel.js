@@ -3,49 +3,50 @@ import { useQuery, gql } from '@apollo/client';
 
 const GET_DROPDOWN1_OPTIONS = gql`
   query GetDropdown1Options {
-    dropdown1Options {
-      id
-      label
+    Object {
+        ObjectID
+        Name
+      }
     }
-  }
 `;
 
 const GET_DROPDOWN2_OPTIONS = gql`
   query GetDropdown2Options {
-    dropdown2Options {
-      id
-      label
-    }
+    Category {
+        CategoryID
+        Name
+      }
   }
 `;
 
 const GET_DROPDOWN3_OPTIONS = gql`
   query GetDropdown3Options {
-    dropdown3Options {
-      id
-      label
-    }
+    SubCategory {
+        SubCategoryID
+        Name
+      }
   }
 `;
 
 const GET_DROPDOWN4_OPTIONS = gql`
   query GetDropdown4Options {
-    dropdown4Options {
-      id
-      label
+    Article {
+        ArticleID
+        Name
     }
   }
 `;
 
 const DBControlPanel = () => {
-    const [dropdown1Options, setDropdown1Options] = useState([]);
-    const [dropdown2Options, setDropdown2Options] = useState([]);
-    const [dropdown3Options, setDropdown3Options] = useState([]);
-    const [dropdown4Options, setDropdown4Options] = useState([]);
+    const [Objects, setDropdown1Options] = useState([]);
+    const [Categorys, setDropdown2Options] = useState([]);
+    const [SubCategorys, setDropdown3Options] = useState([]);
+    const [Articles, setDropdown4Options] = useState([]);
 
     const { loading: loadingDropdown1, error: errorDropdown1, data: dataDropdown1 } =
         useQuery(GET_DROPDOWN1_OPTIONS);
 
+    console.log(errorDropdown1);
     const { loading: loadingDropdown2, error: errorDropdown2, data: dataDropdown2 } =
         useQuery(GET_DROPDOWN2_OPTIONS);
 
@@ -57,39 +58,44 @@ const DBControlPanel = () => {
 
     useEffect(() => {
         if (dataDropdown1) {
-            setDropdown1Options(dataDropdown1.dropdown1Options);
+            setDropdown1Options(dataDropdown1.Object);
         }
     }, [dataDropdown1]);
 
     useEffect(() => {
         if (dataDropdown2) {
-            setDropdown2Options(dataDropdown2.dropdown2Options);
+            setDropdown2Options(dataDropdown2.Category);
         }
     }, [dataDropdown2]);
 
     useEffect(() => {
         if (dataDropdown3) {
-            setDropdown3Options(dataDropdown3.dropdown3Options);
+            setDropdown3Options(dataDropdown3.SubCategory);
         }
     }, [dataDropdown3]);
 
     useEffect(() => {
         if (dataDropdown4) {
-            setDropdown4Options(dataDropdown4.dropdown4Options);
+            setDropdown4Options(dataDropdown4.Article);
         }
     }, [dataDropdown4]);
 
     return (
         <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
             <select>
                 {loadingDropdown1 ? (
                     <option>Loading Dropdown 1...</option>
                 ) : errorDropdown1 ? (
                     <option>Error loading Dropdown 1</option>
                 ) : (
-                    dropdown1Options.map((option) => (
-                        <option key={option.id} value={option.id}>
-                            {option.label}
+                    Objects.map((Object) => (
+                        <option key={Object.ObjectID} value={Object.ObjectID}>
+                            {Object.Name}
                         </option>
                     ))
                 )}
@@ -101,9 +107,9 @@ const DBControlPanel = () => {
                 ) : errorDropdown2 ? (
                     <option>Error loading Dropdown 2</option>
                 ) : (
-                    dropdown2Options.map((option) => (
-                        <option key={option.id} value={option.id}>
-                            {option.label}
+                    Categorys.map((Category) => (
+                        <option key={Category.CategoryID} value={Category.CategoryID}>
+                            {Category.Name}
                         </option>
                     ))
                 )}
@@ -115,9 +121,9 @@ const DBControlPanel = () => {
                 ) : errorDropdown3 ? (
                     <option>Error loading Dropdown 3</option>
                 ) : (
-                    dropdown3Options.map((option) => (
-                        <option key={option.id} value={option.id}>
-                            {option.label}
+                    SubCategorys.map((SubCategory) => (
+                        <option key={SubCategory.CategoryID} value={SubCategory.CategoryID}>
+                            {SubCategory.Name}
                         </option>
                     ))
                 )}
@@ -128,9 +134,9 @@ const DBControlPanel = () => {
                 ) : errorDropdown4 ? (
                     <option>Error loading Dropdown 4</option>
                 ) : (
-                    dropdown4Options.map((option) => (
-                        <option key={option.id} value={option.id}>
-                            {option.label}
+                    Articles.map((Article) => (
+                        <option key={Article.ArticleID} value={Article.ArticleID}>
+                            {Article.Name}
                         </option>
                     ))
                 )}
