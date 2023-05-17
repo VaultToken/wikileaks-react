@@ -16,22 +16,28 @@ import Home from "./container/Home";
 import Blogs from "./container/Blogs";
 import Contact from "./container/Contact";
 import NoPage from "./container/NoPage";
+import DBControlPanel from "./container/DBControlPanel";
+import {ApolloProvider} from "@apollo/client";
+import clientHasuraPublic from "./apolloClient";
 
 
 const App = () => {
 
   return (
-    <Router>
-        <Header/>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} />
-        </Routes>
-        <Footer/>
+    <ApolloProvider client={clientHasuraPublic}>
+        <Router>
+            <Header/>
+            <Routes>
+                <Route index element={<Home />} />
+                <Route path="blogs" element={<Blogs />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="*" element={<NoPage />} />
+                <Route path="dbcontrolpanel" element={<DBControlPanel />} />
+            </Routes>
+            <Footer/>
 
-    </Router>
+        </Router>
+    </ApolloProvider>
   );
 };
 
