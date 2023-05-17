@@ -30,11 +30,12 @@ const SearchBar = () =>  {
         setActiveSearchTerm('');
     }
     
-    const [getArticles, { loading, error, data },] = useLazyQuery(SEARCH_GET_ARTICLES, {client: clientHasuraPublic});
+    const [getArticles, { loading, error, data },] = useLazyQuery(SEARCH_GET_ARTICLES);
 
     const handleSearch = () => {
         getArticles({ variables: { searchQuery: `${actualSearchTerm}%` },
-        onCompleted: (res) => {console.log(res);}
+        onCompleted: (res) => {console.log(res);},
+        onError: (res) => {console.log(res)}
         });
     }
     
