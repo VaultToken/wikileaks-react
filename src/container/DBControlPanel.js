@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import TestingDumpingGround from "../components/TestingDumpingGround";
 
 const GET_DROPDOWN1_OPTIONS = gql`
   query GetDropdown1Options {
@@ -82,6 +83,7 @@ const DBControlPanel = () => {
 
     return (
         <div>
+        <TestingDumpingGround />
         <br />
         <br />
         <br />
